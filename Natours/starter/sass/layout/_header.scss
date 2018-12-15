@@ -1,0 +1,37 @@
+.header {
+    position: relative;
+    height: 95vh; /* At every point  the box should be 95% of the viewport height */
+    background-image: linear-gradient(to right bottom,
+    rgba($color-primary-light, 0.801), 
+    rgba($color-primary-dark, 0.801)), 
+    url(../img/hero.jpg);
+    background-size: cover; /* whatever the width of viewport it will always try to fit the width and height */
+    background-position: top; /* top of image always stays at the top of the container. top - bottom - center*/
+
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%); /* Define 4 corners you want to show, clockwise, x y, x y  TOP LEFT CORNER IS THE REFERENCE*/
+
+    &__logo-box {
+        position: absolute; /* position used is the closest parent with position: relative */
+        /* top: 40px;
+        left: 40px; */
+        top: 4rem; /* remember rem is rem * root font-size */
+        left: 4rem;
+    }
+
+    /* Image in div */
+    &__logo {
+        /* height: 35px; */
+        height: 3.5rem;
+    }
+
+    /* H1 and Spans */
+    &__text-box {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* translates the element 50% of width to the left, and 50% of the height up */
+        text-align: center;
+        
+    }
+}

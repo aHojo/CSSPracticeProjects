@@ -1,0 +1,79 @@
+RESPONSIVE DESIGN
+    - Fluid Layouts
+    - Media Queries
+    - Responsive Images
+    - Correct Units
+    - Desktop First vs Mobile First
+
+MAINTAINABLE and SCALABLE CODE
+    - Clean
+    - Easy-to-understand
+    - Growth
+    - Reusable
+    - How to organize files
+    - How to name classes
+    - How to structure HTML
+Web Performance
+    - Faster and Smaller
+    - Less HTTP requests
+    - Compress code 
+    - use a CSS preprocessor
+    - Compress Images
+
+HOW CSS IS PARSED
+    Selector    Declaration Block
+       |         |
+    .my-class {
+        color: blue;
+        text-align: center;
+        font-size: 20px; -Declaration, property: declared value
+    }
+
+The Cascade ( C in CSS )
+
+    Cascade - Process of combining different stylesheets and resolving conflicts between different CSS rules and declarations, when more than one rule applies to a certain element. 
+
+    Author - What the developers write
+    
+    User - CSS coming from the user (Changing the default font size of the browser)
+    
+    Browser (user agent)
+
+    Importance > Specificity > Source Order
+    1.User !important declarations
+    2. Author !important declarations
+    3. Author declarations
+    4. User Declarations
+    5. Default Browser Declarations
+
+        Same Importance?
+            |
+    1. Inline Styles
+    2. IDs
+    3. Classes, pseudo-classes, attribute
+    4. Elements, pseudo-element
+        
+        Same Specificity
+            |
+    The last declaration in the code will override all other declarations and will be applied
+
+CSS Declarations with the !imporatnt have the highest priority.
+    - Only use !important as a last resort. It's better to use correct specificities.
+Inline Styles will always have priority over external
+
+A selector with 1 id is more specific than one with 1000 classes
+
+A selector that contains 1 class is more specific than one with 1000 elements. 
+
+Universal selector has no specificity value * = (0,0,0,0)
+
+Rely more on specificity than order of selectors. 
+
+Rely on order when using 3rd party stylesheets. 
+---
+
+VALUE PROCESSING
+
+
+INHERITANCE
+

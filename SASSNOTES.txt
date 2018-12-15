@@ -1,0 +1,344 @@
+Main SASS Features
+
+    Vairables - Reusable values such as colors, font-sizes, spacing, etc.
+    
+    Nesting - To nest selectors inside of one another, allowing us to write less code.
+
+    Operators - for mathmatical operations right inside of CSS
+
+    Partials and imports - to write CSS in different files and importing them all into one single file.
+
+    Mixins - to write reusable pieces of CSS code.
+
+    Functions- Similar to mixins, with the difference that they produce a value that can then be used. 
+
+    Extends - To make different selectors inherit declarations that are common to all of them.
+
+    Control Directives - for writing complex code using conditionals and loops (not covered in this course.)
+---
+
+    Variables and Nesting
+
+
+    HTML
+    <nav >
+  <ul class="navigation">
+    <li><a href="#">About Us</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+
+  <div class="buttons">
+    <a class="btn-main"href="#">Main</a>
+    <a class="btn-qot"href="#">Get a Quote</a>
+  </div>
+</nav>
+
+SCSS
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+$color-primary: #f9ed69; //yellow color
+$color-secondary: #f08a5d;
+$color-tertiary: #b83b5e;
+$color-text-dark: #333;
+$width-button: 150px;
+$color-text-white: #eee;
+nav {
+  margin: 30px;
+  background-color: $color-primary;
+  
+  //without & it would compile to nav ::after
+  &::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+}
+
+
+.navigation {
+  float: left;
+  list-style: none;
+  
+  li {
+    display: inline-block;
+    margin-left: 30px;
+    //The & will compile down to .navigation li:first-child 
+    &:first-child {
+    margin: 0;
+  }
+    //This is li a:link {}
+    a:link {
+      text-decoration: none;
+      text-transformation: uppercase;
+      color: $color-text-dark;
+      
+    }
+  }
+  
+  
+}
+
+.buttons {
+  float: right;
+}
+
+.btn-main:link,
+.btn-qot:link {
+  padding: 10px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 100px;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: $width-button;
+  color: $color-text-white;
+}
+
+.btn-main {
+  &:link {
+    background-color: $color-secondary;
+  }
+  &:hover {
+    background-color: darken($color-secondary, 15%);
+  }
+}
+
+.btn-qot {
+  &:link {
+    background-color: $color-tertiary;
+  }
+  &:hover {
+    background-color: lighten($color-tertiary, 15%);
+  }
+}
+
+COMPILED CSS
+* {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  margin: 30px;
+  background-color: #f9ed69;
+}
+nav::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.navigation {
+  float: left;
+  list-style: none;
+}
+.navigation li {
+  display: inline-block;
+  margin-left: 30px;
+}
+.navigation li:first-child {
+  margin: 0;
+}
+.navigation li a:link {
+  text-decoration: none;
+  text-transformation: uppercase;
+  color: #333;
+}
+
+.buttons {
+  float: right;
+}
+
+.btn-main:link,
+.btn-qot:link {
+  padding: 10px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 100px;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 150px;
+  color: #eee;
+}
+
+.btn-main:link {
+  background-color: #f08a5d;
+}
+.btn-main:hover {
+  background-color: #ea5717;
+}
+
+.btn-qot:link {
+  background-color: #b83b5e;
+}
+.btn-qot:hover {
+  background-color: #d16f8a;
+}
+
+---
+MIXINS Extends and Functions
+
+SCSS* {
+  margin: 0;
+  padding: 0;
+}
+
+$color-primary: #f9ed69; //yellow color
+$color-secondary: #f08a5d;
+$color-tertiary: #b83b5e;
+$color-text-dark: #333;
+$color-text-white: #eee;
+
+$width-button: 150px;
+//MIXIN BELOW clearfix is the name of the mixin
+@mixin clearfix {
+  &::after {
+  content: "";
+  clear: both;
+  display: table;
+  }
+}
+//Can add arguements to the mixins
+@mixin style-link-text($color) {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: $color;
+}
+
+//Functions
+@function divide($a, $b)
+{
+  @return $a  / $b;
+}
+
+nav {
+  // Using the function
+  margin: divide(60, 2) * 1px;
+  background-color: $color-primary;
+ 
+  //Adding the mixin
+  @include clearfix;
+}
+
+
+.navigation {
+  float: left;
+  list-style: none;
+  
+  li {
+    display: inline-block;
+    margin-left: 30px;
+    //The & will compile down to .navigation li:first-child 
+    &:first-child {
+    margin: 0;
+  }
+    //This is li a:link {}
+    a:link {
+      @include style-link-text($color-text-dark);
+      
+    }
+  }
+  
+  
+}
+
+.buttons {
+  float: right;
+}
+
+//Extends
+%btn-placeholder {
+  padding: 10px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 100px;
+  width: $width-button;
+  @include style-link-text($color-text-white);
+}
+
+.btn-main {
+  &:link {
+    @extend %btn-placeholder;
+    background-color: $color-secondary;
+  }
+  &:hover {
+    background-color: darken($color-secondary, 15%);
+  }
+}
+
+.btn-qot {
+  &:link {
+    @extend %btn-placeholder;
+    background-color: $color-tertiary;
+  }
+  &:hover {
+    background-color: lighten($color-tertiary, 15%);
+  }
+}
+
+COMPILED CSS
+* {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  margin: 30px;
+  background-color: #f9ed69;
+}
+nav::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.navigation {
+  float: left;
+  list-style: none;
+}
+.navigation li {
+  display: inline-block;
+  margin-left: 30px;
+}
+.navigation li:first-child {
+  margin: 0;
+}
+.navigation li a:link {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #333;
+}
+
+.buttons {
+  float: right;
+}
+
+.btn-main:link, .btn-qot:link {
+  padding: 10px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 100px;
+  width: 150px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #eee;
+}
+
+.btn-main:link {
+  background-color: #f08a5d;
+}
+.btn-main:hover {
+  background-color: #ea5717;
+}
+
+.btn-qot:link {
+  background-color: #b83b5e;
+}
+.btn-qot:hover {
+  background-color: #d16f8a;
+}
