@@ -82,9 +82,19 @@
                 </div>
                 <div class="col-1-of-2">
                     <div class="composition">
-                        <img src="./img/nat-1-large.jpg" alt="photo1" class="composition__photo composition__photo--p1">
-                        <img src="./img/nat-2-large.jpg" alt="photo2" class="composition__photo composition__photo--p2">
-                        <img src="./img/nat-3-large.jpg" alt="photo3" class="composition__photo composition__photo--p3">
+                        
+                        <!-- The 300w and 1000w are width descriptors used by the browsers -->
+                        <!-- To get the sizes vw, size of picture at breakpoint/size of breakpoint. The 20vw is from 171/900 (Picture was already placed.) -->
+                        <!-- Add the src attribute in case srcset is not supported -->
+                        <img srcset="img/nat-1.jpg 300w, img/nat-1-large.jpg 1000w" sizes="(max-width: 900px) 20vw (max-width: 600px) 30vw, 300px" alt="photo1"  class="composition__photo composition__photo--p1" src="./img/nat-1-large.jpg" />
+                        <img srcset="img/nat-2.jpg 300w, img/nat-2-large.jpg 1000w" sizes="(max-width: 900px) 20vw (max-width: 600px) 30vw, 300px" alt="photo2"  class="composition__photo composition__photo--p2" src="./img/nat-1-large.jpg" />
+                        <img srcset="img/nat-3.jpg 300w, img/nat-3-large.jpg 1000w" sizes="(max-width: 900px) 20vw (max-width: 600px) 30vw, 300px" alt="photo1"  class="composition__photo composition__photo--p3" src="./img/nat-3-large.jpg" />
+
+                        
+
+                        <!-- <img src="./img/nat-1-large.jpg" alt="photo1" class="composition__photo composition__photo--p1"> -->
+                        <!-- <img src="./img/nat-2-large.jpg" alt="photo2" class="composition__photo composition__photo--p2">
+                        <img src="./img/nat-3-large.jpg" alt="photo3" class="composition__photo composition__photo--p3"> -->
                     </div>
                 </div>
             </div>
@@ -355,26 +365,46 @@
 
     <footer class="footer">
         <div class="footer__logo-box">
-            <img src="img/logo-green-2x.png" alt="Full Logo" class="footer__logo">
+
+            <picture class="footer_logo">
+                <source srcset="img/logo-green-small-1x.png 1x,img/logo-green-small-2x.png 2x" media="(max-width: 37.5em)">
+                    <img srcset="img/logo-green-1x.png 1x, img/logo-green-2x.png 2x" alt="Full Logo" class="footer__logo" src="img/logo-green-2x.png">
+            </picture>
+            <!-- srcset allows us to specify two different images so the browser can pic the best image-->
+            <!-- 1x and 2x are the descriptors, after the realative path -->
+            <!-- <img srcset="img/logo-green-1x.png 1x, img/logo-green-2x.png 2x" alt="Full Logo" class="footer__logo"> -->
         </div>
-            <div class="row">
-                <div class="col-1-of-2">
-                    <div class="footer__navigation">
-                        <ul class="footer__list">
-                            <li class="footer__item"><a href="#" class="footer__link">Company</a></li>
-                            <li class="footer__item"><a href="#" class="footer__link">Contact Us</a></li>
-                            <li class="footer__item"><a href="#" class="footer__link">Careers</a></li>
-                            <li class="footer__item"><a href="#" class="footer__link">Privacy Policy</a></li>
-                            <li class="footer__item"><a href="#" class="footer__link">Terms</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-1-of-2">
-                    <p class="footer__copyright">
-                        Built by <a href="#" class="footer__link">Andrew Hojo</a> for his online course <a href="#" class="footer__link">Advanced CSS and Sass</a>. Copyright &copy; by Andrew Hojnowski. You are 100% allowed to use this webpage for both webpage and comercial use, but NOT to claim it as your own. A credit to the original offer is highly appreciated. 
-                    </p>
+        <div class="row">
+            <div class="col-1-of-2">
+                <div class="footer__navigation">
+                    <ul class="footer__list">
+                        <li class="footer__item">
+                            <a href="#" class="footer__link">Company</a>
+                        </li>
+                        <li class="footer__item">
+                            <a href="#" class="footer__link">Contact Us</a>
+                        </li>
+                        <li class="footer__item">
+                            <a href="#" class="footer__link">Careers</a>
+                        </li>
+                        <li class="footer__item">
+                            <a href="#" class="footer__link">Privacy Policy</a>
+                        </li>
+                        <li class="footer__item">
+                            <a href="#" class="footer__link">Terms</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+            <div class="col-1-of-2">
+                <p class="footer__copyright">
+                    Built by <a href="#" class="footer__link">Andrew Hojo</a> for his online course <a href="#" class="footer__link">Advanced
+                        CSS and Sass</a>. Copyright &copy; by Andrew Hojnowski. You are 100% allowed to use this
+                    webpage for both webpage and comercial use, but NOT to claim it as your own. A credit to the
+                    original offer is highly appreciated.
+                </p>
+            </div>
+        </div>
     </footer>
 
     <div class="popup" id="popup">
@@ -386,8 +416,13 @@
             <div class="popup__right">
                 <a href="#section-tours" class="popup__close">&times;</a>
                 <h2 class="heading-secondary u-margin-bottom-small">Start Booking Now</h2>
-                <h3 class="heading-tertiary u-margin-bottom-small">Important &ndash; Please read these terms before booking.</h3>
-                <p class="popup__text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident fuga debitis ipsam, itaque numquam blanditiis aspernatur neque ducimus dolore repellat ipsum sit architecto tempore magni eaque. Quod iste ad cupiditate. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto sunt adipisci perferendis quisquam, rem necessitatibus quis, excepturi nihil, cumque incidunt veniam quo. Porro molestias corrupti, ipsa veniam magnam cumque qui.
+                <h3 class="heading-tertiary u-margin-bottom-small">Important &ndash; Please read these terms before
+                    booking.</h3>
+                <p class="popup__text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident fuga debitis
+                    ipsam, itaque numquam blanditiis aspernatur neque ducimus dolore repellat ipsum sit architecto
+                    tempore magni eaque. Quod iste ad cupiditate. Lorem ipsum, dolor sit amet consectetur adipisicing
+                    elit. Architecto sunt adipisci perferendis quisquam, rem necessitatibus quis, excepturi nihil,
+                    cumque incidunt veniam quo. Porro molestias corrupti, ipsa veniam magnam cumque qui.
                 </p>
                 <a href="#" class="btn btn--green">Book Now</a>
             </div>

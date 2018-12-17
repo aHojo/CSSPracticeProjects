@@ -12,25 +12,48 @@
 
     transform: skewX(-12deg);
 
+    @include respond(tab-port) {
+        width: 100%;
+        padding: 4rem;
+        padding-left: 7rem;
+    }
+
+    @include respond(phone) {
+        transform: skewX(0);
+    }
+
     //Direct Child selecting everything - This doesn't work for the picture because it already has a transform and it takes precedence. 
     & > * {
         transform: skewX(12deg);
+
+        @include respond(phone) {
+            transform: skewX(0);
+        }
     }
 
     &__shape {
         width: 15rem;
         height: 15rem;
-        
+        border-radius: 50%;
         float: left;
 
-        -webkit-shape-outside: circle(50% at 50% 50%); //Radius at center. Element must be floated/
-        shape-outside: circle(50% at 50% 50%); //Radius at center. Element must be floated and it also has to have a width and a height. 
-
-        -webkit-clip-path: circle(50% at 50% 50%);
-        clip-path: circle(50% at 50% 50%);
-
+        
+        overflow: hidden;
         transform: translateX(-3rem) skewX(12deg); 
         position: relative; //For the absolute on the figcaption 
+
+        @supports (clip-path: plygon(0 0)) or (-webkit-clip-path: plygon(0 0)) {
+            width: 15rem;
+            height: 15rem;
+
+            -webkit-clip-path: circle(50% at 50% 50%);
+            clip-path: circle(50% at 50% 50%);
+            -webkit-shape-outside: circle(50% at 50% 50%); //Radius at center. Element must be floated/
+            shape-outside: circle(50% at 50% 50%); //Radius at center. Element must be floated and it also has to have a width and a height. 
+        }
+        @include respond(phone) {
+            transform: translate(-3rem) skewX(0);
+        }
     }
 
     &__image {
@@ -41,6 +64,10 @@
 
     &__text {
         transform: skewX(12deg);
+
+        @include respond(phone) {
+            transform: skewX(0);
+        }
     }
 
     &__caption {

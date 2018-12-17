@@ -24,11 +24,11 @@
 */
 
 //@content allows us to pass in a block of code 
-@mixin respond-phone {
-    @media (max-width: 600px) { 
-        @content 
-    }; 
-}
+// @mixin respond-phone {
+//     @media (max-width: 600px) { 
+//         @content 
+//     }; 
+// }
 
 /* 
 $breakpoint arguement choices
@@ -38,6 +38,8 @@ $breakpoint arguement choices
 - big-desktop
 */
 
+
+/* ORDER : Base + Typography > General Layout + grid > page layout > components */
 // 1em = 16px em is not effected by root font size. 
 //16px is the default size. 
 @mixin respond($breakpoint) {

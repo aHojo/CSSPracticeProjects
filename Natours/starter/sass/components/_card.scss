@@ -16,6 +16,7 @@
         top: 0;
         left: 0;
         width: 100%;
+        -webkit-backface-visibility: hidden;
         backface-visibility: hidden; //Hidden makes it hide the backpart. Meaning when we rotate, we are unable to see the backpart.  
 
         border-radius: .3rem;
@@ -24,29 +25,33 @@
         overflow: hidden; // This is for the background images on the cards to keep the edges round. 
 
         &--front {
-            
-            
+
+
             &-1 {
                 background-color: $color-white;
             }
+
             &-2 {
                 background-color: $color-white;
             }
+
             &-3 {
                 background-color: $color-white;
             }
         }
 
         &--back {
-            
+
             transform: rotateY(180deg); //Starts off rotated 180 degrees 
-            
+
             &-1 {
                 background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark);
             }
+
             &-2 {
                 background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
             }
+
             &-3 {
                 background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark);
             }
@@ -56,29 +61,32 @@
     &:hover &__side--front {
         transform: rotateY(-180deg);
     }
+
     &:hover &__side--back {
         transform: rotateY(0); //This will bring it to the front since it starts at 180 degrees
     }
-    
+
     //FRONT SIDE STYLING
     &__picture {
         background-size: cover; //Outside of selector, because it is for all images
         height: 23rem;
         background-blend-mode: screen; //this is to blend the background images in background-image.
 
-        
+
         -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); // Each comma is X Y pair.
         clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); // Each comma is X Y pair. 
 
         border-top-left-radius: 3px;
         border-top-right-radius: 3px;
-        
+
         &--1 {
             background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark), url(../img/nat-5.jpg);
         }
+
         &--2 {
             background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark), url(../img/nat-6.jpg);
         }
+
         &--3 {
             background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark), url(../img/nat-7.jpg);
         }
@@ -105,19 +113,21 @@
 
 
         &--1 {
-            background-image: linear-gradient(to right bottom, 
-            rgba($color-secondary-light, .85), 
-            rgba($color-secondary-dark, .85));
+            background-image: linear-gradient(to right bottom,
+                rgba($color-secondary-light, .85),
+                rgba($color-secondary-dark, .85));
         }
+
         &--2 {
-            background-image: linear-gradient(to right bottom, 
-            rgba($color-primary-light, .85), 
-            rgba($color-primary-dark, .85));
+            background-image: linear-gradient(to right bottom,
+                rgba($color-primary-light, .85),
+                rgba($color-primary-dark, .85));
         }
+
         &--3 {
-            background-image: linear-gradient(to right bottom, 
-            rgba($color-tertiary-light, .85), 
-            rgba($color-tertiary-dark, .85));
+            background-image: linear-gradient(to right bottom,
+                rgba($color-tertiary-light, .85),
+                rgba($color-tertiary-dark, .85));
         }
     }
 
@@ -170,6 +180,60 @@
     &__price-value {
         font-size: 6rem;
         font-weight: 100;
+    }
+
+
+    @include respond(tab-port) {
+
+        height: auto; //When we declare position absolute, the parent will lose it's height and be taken out of the natural flow. To fix this we have to specifiy the same height. 
+
+        border-radius: .3rem;
+        background-color: $color-white;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+        
+
+        &__side {
+            height: auto; 
+            position: relative;
+            box-shadow: none;
+            
+
+            &--back {
+
+                transform: rotateY(0); //Starts off rotated 180 degrees 
+                clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+            }
+        }
+
+        &:hover &__side--front {
+            transform: rotateY(0);
+        }
+
+        &__details {
+            padding: 1rem 3rem;
+        }
+        //BACK SIDE STYLING
+        &__cta {
+            position: relative;
+            top: 0;
+            left: 0;
+
+            transform: translate(0);
+
+            width: 100%; //To fix the button
+
+            padding: 7rem 4rem 4rem 4rem;
+        }
+
+        &__price-box {
+            margin-bottom: 3rem;
+        }
+
+
+        &__price-value {
+            font-size: 4rem;
+        }
+
     }
 }
 

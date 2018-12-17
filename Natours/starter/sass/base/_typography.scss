@@ -15,6 +15,12 @@
         animation-timing-function: ease-out;
         /* animation-iteration-count: 3; How many times the animateion happens */
         /* animation-delay: 3s; */
+        
+        //Ensure the text fits on the screen
+        @include respond(phone) {
+            letter-spacing: 1rem;
+            font-size: 5rem;
+        }
     }
     
     &--sub {
@@ -25,6 +31,12 @@
         animation-name: moveInRight; /* Name of the @keframes */
         animation-duration: 1s; /* How long the animation takes to reach 100% */
         animation-timing-function: ease-out;
+
+        //Ensure the text fits on the screen
+        @include respond(phone) {
+            letter-spacing: .5rem;
+            font-size: 5rem;
+        }
     }
 
 }
@@ -41,6 +53,15 @@
     color: transparent;
     letter-spacing: .2rem;
     transition: all .2s;
+
+    @include respond(tab-port) {
+        font-size: 3rem;
+    }
+
+    @include respond(phone) {
+        font-size: 2.5rem; //Phone comes last because it's the smallest and we are using max-width. 
+    }
+
 
     &:hover {
         transform:skewY(2deg) skewX(15deg);

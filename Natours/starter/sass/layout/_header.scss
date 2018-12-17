@@ -1,15 +1,49 @@
 .header {
     position: relative;
-    height: 95vh; /* At every point  the box should be 95% of the viewport height */
+    height: 85vh;
     background-image: linear-gradient(to right bottom,
     rgba($color-primary-light, 0.801), 
     rgba($color-primary-dark, 0.801)), 
-    url(../img/hero.jpg);
+    url(../img/hero-small.jpg);
     background-size: cover; /* whatever the width of viewport it will always try to fit the width and height */
     background-position: top; /* top of image always stays at the top of the container. top - bottom - center*/
 
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
-    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%); /* Define 4 corners you want to show, clockwise, x y, x y  TOP LEFT CORNER IS THE REFERENCE*/
+    
+
+    // Feature Query
+    //In case clip-path is not supported like in safari. 
+    @supports (clip-path: plygon(0 0)) or (-webkit-clip-path: plygon(0 0)) {
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); /* Define 4 corners you want to show, clockwise, x y, x y  TOP LEFT CORNER IS THE REFERENCE*/
+        height: 95vh; /* At every point  the box should be 95% of the viewport height */
+    }
+
+    //DPI = dots per inch
+    // Whenever 192dpi or higher, this code happens. 
+
+    //The comma is an OR
+    // -webkit-min-device-pixel-ratio: 2 is for safari
+    @media (min-resolution: 192dpi) and (min-width: 37.5em),
+    (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em), 
+    (min-width: 125em) {
+        background-image: linear-gradient(to right bottom,
+        rgba($color-primary-light, 0.801), 
+        rgba($color-primary-dark, 0.801)), 
+        url(../img/hero.jpg);
+    
+    }
+
+    // @media (min-width: 2000px) {
+    //     background-image: linear-gradient(to right bottom,
+    //     rgba($color-primary-light, 0.801), 
+    //     rgba($color-primary-dark, 0.801)), 
+    //     url(../img/hero.jpg);
+    // }
+
+    @include respond(phone) {
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    }
 
     &__logo-box {
         position: absolute; /* position used is the closest parent with position: relative */
@@ -19,7 +53,7 @@
         left: 4rem;
     }
 
-    /* Image in div */
+    /* * Image in div */
     &__logo {
         /* height: 35px; */
         height: 3.5rem;
